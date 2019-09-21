@@ -1,0 +1,42 @@
+﻿@using UserMessageHandler.Models
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <script>
+        var messageStatuses = [];
+        @foreach (var item in Enum.GetValues(typeof(Status)))
+        {
+            <text>messageStatuses.push({ name:'</text>@(item)<text>', value:</text>@((int)item)<text>});</text>
+        }
+    </script>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+</head>
+<body>
+    <div id="settings">
+        <div id="status-check">
+            @foreach (var item in Enum.GetValues(typeof(Status)))
+            {
+                <p>
+                    <input class="checkbox" type="checkbox" id="property-@item" /> @((Status)item)
+                </p>
+            }
+        </div>
+        <div id="range">
+            <p>
+                <input type="number" id="range-input" name="number-input" />
+            </p>
+        </div>
+        <div id="accept-button-place"><button id="accept-button" onclick="getTable()">показать</button></div>
+    </div>
+    <div id="table-place">
+        <table id="user-message-table" border="1"></table>
+    </div>
+    <div><button onclick="ServerHubService.setupHubConnection()">Setup Connection</button></div>
+    <div><button onclick="ServerHubService.sendMessage()">Send Message</button></div>
+</body>
+</html>

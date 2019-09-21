@@ -1,0 +1,2 @@
+2019-09-21 17:04:59,750 [7] ERROR UserMessageHandler.Controllers.HomeController [(null)] - System.Exception: Выдано исключение типа "System.Exception".
+   в UserMessageHandler.Controllers.HomeController.GetMessages(Int32[] statusInfo, Int32 range) в D:\Csharpik\UserMessageHandler\UserMessageHandler\Controllers\HomeController.cs:строка 49
