@@ -8,15 +8,15 @@ using System.Web;
 
 namespace UserMessageHandler.Models
 {
-    public enum Status : int
+    public enum Status
     {
-        First = 0,
-        Second
+        Pending,
+        Processed
     }
 
-    class MessageContext : DbContext
+    class AppDbContext : DbContext
     {
-        public MessageContext() : base("DbConnection")
+        public AppDbContext() : base("DbConnection")
         { }
         public DbSet<MessageInfo> Messages { get; set; }
     }
@@ -29,10 +29,5 @@ namespace UserMessageHandler.Models
         public int UserId { get; set; }
         public int Status { get; set; }
         public string ContactInfo { get; set; }
-    }
-
-    public class Data
-    {
-        static public string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
     }
 }

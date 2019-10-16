@@ -11,10 +11,10 @@
             <text>messageStatuses.push({ name:'</text>@(item)<text>', value:</text>@((int)item)<text>});</text>
         }
     </script>
-
     <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/site.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    <link href="~/Content/Site.css">
 </head>
 <body>
     <div id="settings">
@@ -28,15 +28,17 @@
         </div>
         <div id="range">
             <p>
-                <input type="number" id="range-input" name="number-input" />
+                <input type="number" id="count-input" name="number-input" />
             </p>
         </div>
-        <div id="accept-button-place"><button id="accept-button" onclick="getTable()">показать</button></div>
+        <div id="accept-button-place"><button id="accept-button" onclick="getTable()">Показать</button></div>
     </div>
     <div id="table-place">
         <table id="user-message-table" border="1"></table>
     </div>
-    <div><button onclick="ServerHubService.setupHubConnection()">Setup Connection</button></div>
-    <div><button onclick="ServerHubService.sendMessage()">Send Message</button></div>
+    <div id="buttons-panel" >
+        <button onclick="serverHub.setupHubConnection()">Setup Connection</button>
+        <button onclick="serverHub.sendMessage()">Send Message</button>
+    </div>
 </body>
 </html>

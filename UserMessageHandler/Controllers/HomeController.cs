@@ -24,7 +24,7 @@ namespace UserMessageHandler.Controllers
         {
             try
             {
-                using (MessageContext db = new MessageContext())
+                using (AppDbContext db = new AppDbContext())
                 {
                     MessageInfo newMessageInfo = new MessageInfo();
                     newMessageInfo.Message = message;
@@ -37,18 +37,21 @@ namespace UserMessageHandler.Controllers
             }
             catch (Exception ex)
             {
-                log.Error(ex.Data);
+                log.Error(ex);
             }
         }
 
         [HttpPost]
-        public JsonResult GetMessages(int[] statusInfo, int range)
+        public JsonResult GetMessages(int[] statusInfo, int messagesCount)
         {
             try
             {
-                using (MessageContext db = new MessageContext())
+                using (AppDbContext db = new AppDbContext())
                 {
-                    List<MessageInfo> messages = db.Messages.Where(p => statusInfo.Contains(p.Status)).Take(range).ToList<MessageInfo>();
+                    List<MessageInfo> messages = db.Messages
+                        .Where(p => statusInfo.Contains(p.Status))
+                        .Take(messagesCount)
+                        .ToList();
                     return Json(messages);
                 }
             }
@@ -57,7 +60,6 @@ namespace UserMessageHandler.Controllers
                 log.Error(ex);
                 return Json(null);
             }
-
         }
 
         [HttpPost]
@@ -65,7 +67,7 @@ namespace UserMessageHandler.Controllers
         {
             try
             {
-                using (MessageContext db = new MessageContext())
+                using (AppDbContext db = new AppDbContext())
                 {
                     MessageInfo message = db.Messages.Find(messageId);
                     message.Status = newMessageStatus;
@@ -74,7 +76,7 @@ namespace UserMessageHandler.Controllers
             }
             catch (Exception ex)
             {
-                log.Error(ex.Data);
+                log.Error(ex);
             }
         }
 
